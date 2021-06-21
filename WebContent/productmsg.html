@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- Head BEGIN -->
+<head>
+  <meta charset="utf-8">
+  <title>校园闲置物品租赁平台</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta content="Metronic Shop UI description" name="description">
+  <meta content="Metronic Shop UI keywords" name="keywords">
+  <meta content="keenthemes" name="author">
+
+  <meta property="og:site_name" content="-CUSTOMER VALUE-">
+  <meta property="og:title" content="-CUSTOMER VALUE-">
+  <meta property="og:description" content="-CUSTOMER VALUE-">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
+  <meta property="og:url" content="-CUSTOMER VALUE-">
+
+  <link rel="shortcut icon" href="favicon.ico">
+    <link href="layui/css/layui.css" rel="stylesheet">
+  <!-- Fonts START -->
+  <!-- Fonts END -->
+
+  <!-- Global styles START -->
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Global styles END -->
+
+  <!-- Page level plugin styles START -->
+  <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+  <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+  <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
+  <link href="assets/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link href="assets/pages/css/components.css" rel="stylesheet">
+  <link href="assets/corporate/css/style.css" rel="stylesheet">
+  <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+  <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
+  <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+  <link href="assets/corporate/css/custom.css" rel="stylesheet">
+
+    <style>
+        .row.paihan a{
+            color:gray;
+        }
+        .row.paihan a:hover{
+            color:red;
+        }
+        .active{
+            color:red !important;
+        }
+    </style>
+
+  <!-- Theme styles END -->
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+    <!-- BEGIN STYLE CUSTOMIZER -->
+    <div class="color-panel hidden-sm">
+      <div class="color-mode-icons icon-color"></div>
+      <div class="color-mode-icons icon-color-close"></div>
+      <div class="color-mode">
+        <p>THEME COLOR</p>
+        <ul class="inline">
+          <li class="color-red current color-default" data-style="red"></li>
+          <li class="color-blue" data-style="blue"></li>
+          <li class="color-green" data-style="green"></li>
+          <li class="color-orange" data-style="orange"></li>
+          <li class="color-gray" data-style="gray"></li>
+          <li class="color-turquoise" data-style="turquoise"></li>
+        </ul>
+      </div>
+    </div>
+    <!-- END BEGIN STYLE CUSTOMIZER --> 
+
+    <!-- BEGIN TOP BAR -->
+    <div class="pre-header" id="loginiframe">
+
+    </div>
+    <!-- END TOP BAR -->
+
+    <!-- BEGIN HEADER -->
+    <div class="header">
+        <div class="container" id="headeriframe">
+            <!-- BEGIN CART -->
+            <!--END CART -->
+            <!-- BEGIN NAVIGATION -->
+            <!-- END NAVIGATION -->
+        </div>
+    </div>
+    <!-- Header END -->
+
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="index.html">首页</a></li>
+            <li class="active">物品列表</li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40" id="app">
+            <input type="hidden" v-model="childid">
+          <!-- BEGIN SIDEBAR -->
+          <!-- END SIDEBAR -->
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-7">
+            <div class="content-search margin-bottom-20">
+              <div class="row">
+                <div class="col-md-6">
+                  <h1>物品列表 <em></em></h1>
+                </div>
+                <div class="col-md-6" >
+                    <div class="input-group">
+                      <input type="text"  v-model="key" placeholder="物品名称" class="form-control">
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary" @click="getproductmsg()" type="button" style="margin-right: 5px;">搜索</button>
+                      </span>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BEGIN PRODUCT LIST -->
+
+            <div class="row product-list">
+              <div v-for="prod in productmsg" class="col-md-4 col-sm-6 col-xs-12">
+                <div class="product-item">
+                  <div class="pi-img-wrapper">
+                    <img :src="['upload/'+prod.filename]" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                        <a :href="['upload/'+prod.filename]" class="btn btn-default fancybox-button">放大</a>
+                    </div>
+                  </div>
+                  <h3><a :href="['productdetails.html?id='+prod.id]">{{prod.name}}</a></h3>
+                  <div class="pi-price">￥{{prod.price}}</div>
+                  <a :href="['productdetails.html?id='+prod.id]" class="btn btn-default add2cart">查看详情</a>
+                  <a @click="addfav(prod.id)" class="btn btn-default add2cart">收藏物品</a>
+                </div>
+              </div>
+            </div>
+            <!-- END PRODUCT LIST -->
+            <!-- BEGIN PAGINATOR -->
+                <div id="demo1" style="text-align:center"></div>
+            </div>
+            <!-- END PAGINATOR -->
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+        
+
+    <!-- BEGIN BRANDS -->
+    <!-- END BRANDS -->
+
+    <!-- BEGIN STEPS -->
+    <!-- END STEPS -->
+
+    <!-- BEGIN PRE-FOOTER -->
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer" id="footiframe">
+
+    </div>
+
+
+    <!-- END FOOTER -->
+
+    <!-- BEGIN fast view of a product -->
+
+    <!-- END fast view of a product -->
+
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <![endif]-->
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+</body>
+
+
+<script type="text/javascript" src="axios/vue.js"></script>
+<script type="text/javascript" src="axios/axios.min.js"></script>
+<script type="text/javascript" src="axios/qs.js"></script>
+<script type="text/javascript" src="axios/getUrlParams.js"></script>
+<script type="text/javascript" src="layer/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="layer/layer.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+
+
+<script type="text/javascript">
+    var qs = Qs
+    var childid = UrlParam.paramValues("childid")==undefined?"":UrlParam.paramValues("childid").toString()
+    var categoryid = UrlParam.paramValues("categoryid")==undefined?"":UrlParam.paramValues("categoryid").toString()
+    var vmm = new Vue({
+        el:"#app",
+        data:{
+            childid:childid,
+            categoryid:categoryid,
+            productmsg:[],
+            key: '',
+            pageSize:10,
+        },
+        mounted(){
+            sessionStorage.setItem("signoutShow","product")
+            this.getproductmsg()
+        },
+        methods:{
+            getproductmsg() {
+                axios.post('productList.do',qs.stringify({
+                    key:this.key,
+                    childid:this.childid,
+                    categoryid:this.categoryid,
+                    pageSize:this.pageSize,
+                    issj:"yes",
+                })).then(response =>{
+                    layui.use(['laypage', 'layer'], function(){
+                        var laypage = layui.laypage
+                            ,layer = layui.layer;
+                        //总页数大于页码总数
+                        laypage.render({
+                            elem: 'demo1'
+                            ,limit:vmm.pageSize
+                            ,count: response.data.list.length //数据总数
+                            ,jump: function(obj,first){
+                                vmm.current_page(obj.curr,vmm.pageSize)
+                                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                            }
+                        });
+                    });
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+            current_page(page,pageSize){
+                axios.post('productList.do',qs.stringify({
+                    key:this.key,
+                    childid:this.childid,
+                    categoryid:this.categoryid,
+                    pageNum:page,
+                    pageSize:pageSize,
+                    issj:"yes",
+                })).then(response =>{
+                    this.productmsg = response.data.pageInfo.list
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+            addfav(prodid){
+                axios.post('checkmember.do',qs.stringify({
+                })).then(response =>{
+                    if(response.data.data==400){
+                        location.replace("login.html")
+                    }else{
+                        axios.post('favAdd.do',qs.stringify({
+                            productid:prodid,
+                        })).then(response =>{
+                            if(response.data.data==200){
+                                layer.msg("收藏成功",{icon:6})
+                            }else{
+                                layer.msg("已存在收藏记录",{icon:5})
+                                headapp.getcheckmember();
+                            }
+
+                        }).catch(error =>{
+                            console.log(error)
+                        })
+                    }
+                }).catch(error =>{
+                    console.log(error)
+                })
+
+
+            },
+
+
+
+
+
+
+
+        }
+    })
+
+</script>
+<script type="text/javascript">
+    window.onload=function(){
+        $("#loginiframe").load("iframe/loginiframe.html")
+        $("#headeriframe").load("iframe/headeriframe.html")
+        $("#footiframe").load("iframe/footiframe.html")
+    }
+</script>
+<!-- END BODY -->
+</html>

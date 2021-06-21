@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <meta content="" name="description" />
+
+    <meta content="" name="author" />
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+    <link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+
+    <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+
+    <link href="media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+    <link href="media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <link href="media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <!-- END PAGE LEVEL STYLES -->
+
+    <link rel="shortcut icon" href="media/image/favicon.ico" />
+
+    <link rel="stylesheet" href="../kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="../kindeditor/plugins/code/prettify.css" />
+    <script charset="utf-8" src="../kindeditor/plugins/code/prettify.js"></script>
+    <script charset="utf-8" src="../kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="../kindeditor/lang/zh-CN.js"></script>
+    <script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#editor_id');
+        });
+    </script>
+    <script>
+        KindEditor.ready(function(K) {
+            K.create('textarea[name="note"]', {
+                uploadJson : '../kindeditor/jsp/upload_json.jsp',
+                fileManagerJson : '../kindeditor/jsp/file_manager_json.jsp',
+                allowFileManager : true,
+                allowImageUpload : true,
+                autoHeightMode : true,
+                afterCreate : function() {this.loadPlugin('autoheight');},
+                afterBlur : function(){ this.sync(); }  //Kindeditor下获取文本框信息
+            });
+        });
+    </script>
+
+
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <script type="text/javascript" src="../axios/vue.js"></script>
+    <script type="text/javascript" src="../axios/axios.min.js"></script>
+    <script type="text/javascript" src="../axios/qs.js"></script>
+    <script type="text/javascript" src="../axios/getUrlParams.js"></script>
+    <script type="text/javascript" src="../layer/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="../layer/layer.js"></script>
+
+</head>
+<body>
+<div class="page-content">
+
+    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+    <div id="portlet-config" class="modal hide">
+
+        <div class="modal-header">
+
+            <button data-dismiss="modal" class="close" type="button"></button>
+
+            <h3>portlet Settings</h3>
+
+        </div>
+
+        <div class="modal-body">
+
+
+        </div>
+
+    </div>
+
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+    <!-- BEGIN PAGE CONTAINER-->
+
+    <div class="container-fluid">
+
+        <!-- BEGIN PAGE HEADER-->
+
+        <div class="row-fluid">
+
+            <div class="span12">
+
+                <!-- BEGIN STYLE CUSTOMIZER -->
+
+
+
+                <!-- END BEGIN STYLE CUSTOMIZER -->
+
+                <h3 class="page-title">
+
+
+                </h3>
+
+                <ul class="breadcrumb">
+
+                    <li>
+
+                        <i class="icon-home"></i>
+
+                        <a href="index.html">首页</a>
+
+                        <span class="icon-angle-right"></span>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#">关于我们</a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- END PAGE HEADER-->
+
+        <!-- BEGIN PAGE CONTENT-->
+
+
+
+        <div class="row-fluid" id="app">
+
+            <div class="span12">
+
+                <!-- BEGIN VALIDATION STATES-->
+
+                <div class="portlet box green">
+
+                    <div class="portlet-title">
+
+                        <div class="caption"><i class="icon-reorder"></i>关于我们</div>
+
+
+                    </div>
+
+                    <div class="portlet-body form">
+
+                        <!-- BEGIN FORM-->
+
+
+                        <form action="#" id="form_sample_2" class="form-horizontal">
+
+                            <div class="alert alert-error hide">
+
+                                <button class="close" data-dismiss="alert"></button>
+
+                                You have some form errors. Please check below.
+
+                            </div>
+
+
+                            <div class="control-group" style="border:0px solid red;">
+                                <div class="controls" style="margin: 0px;padding: 0px;">
+                                    <textarea  name="content" id="editor_id" style="display: block;width: 100%;height: 300px;float: left"></textarea>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-actions">
+
+                                <a type="submit" @click="edit()" class="btn green">提交</a>
+
+
+                            </div>
+
+                        </form>
+
+                        <!-- END FORM-->
+
+                    </div>
+
+                </div>
+
+                <!-- END VALIDATION STATES-->
+
+            </div>
+
+        </div>
+
+        <!-- END PAGE CONTENT-->
+
+    </div>
+
+    <!-- END PAGE CONTAINER-->
+
+</div>
+</body>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var qs = Qs
+    var vmm = new Vue({
+        el: '#app',
+        data: {
+            about:"",
+            content:"",
+        },
+        mounted(){
+            this.show()
+        },
+        methods: {
+            show(){
+                axios.post('aboutShow.do',qs.stringify({
+                    id:1,
+                })).then(response =>{
+                    this.about = response.data.about
+                    this.content = this.about.content
+                    window.editor.html(this.content)
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+            edit() {
+                this.content = window.editor.html()
+                axios.post('aboutEdit.do',qs.stringify({
+                    id:1,
+                    content:this.content,
+                })).then(response =>{
+                    this.show()
+                    layer.msg("操作成功",{icon:6})
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+        }
+    });
+</script>
+
+</html>

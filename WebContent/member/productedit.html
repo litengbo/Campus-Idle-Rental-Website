@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <meta content="" name="description" />
+
+    <meta content="" name="author" />
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+    <link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+
+    <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+
+    <link href="media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+    <link href="media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <link href="media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <!-- END PAGE LEVEL STYLES -->
+
+    <link rel="shortcut icon" href="media/image/favicon.ico" />
+
+    <link rel="stylesheet" href="../kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="../kindeditor/plugins/code/prettify.css" />
+    <script charset="utf-8" src="../kindeditor/plugins/code/prettify.js"></script>
+    <script charset="utf-8" src="../kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="../kindeditor/lang/zh-CN.js"></script>
+    <script>
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#editor_id');
+        });
+    </script>
+    <script>
+        KindEditor.ready(function(K) {
+            K.create('textarea[name="note"]', {
+                uploadJson : '../kindeditor/jsp/upload_json.jsp',
+                fileManagerJson : '../kindeditor/jsp/file_manager_json.jsp',
+                allowFileManager : true,
+                allowImageUpload : true,
+                autoHeightMode : true,
+                afterCreate : function() {this.loadPlugin('autoheight');},
+                afterBlur : function(){ this.sync(); }  //Kindeditor下获取文本框信息
+            });
+        });
+    </script>
+
+
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <script type="text/javascript" src="../axios/vue.js"></script>
+    <script type="text/javascript" src="../axios/axios.min.js"></script>
+    <script type="text/javascript" src="../axios/qs.js"></script>
+    <script type="text/javascript" src="../axios/getUrlParams.js"></script>
+    <script type="text/javascript" src="../layer/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="../layer/layer.js"></script>
+
+</head>
+<body>
+<div class="page-content">
+
+    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+    <div id="portlet-config" class="modal hide">
+
+        <div class="modal-header">
+
+            <button data-dismiss="modal" class="close" type="button"></button>
+
+            <h3>portlet Settings</h3>
+
+        </div>
+
+        <div class="modal-body">
+
+
+        </div>
+
+    </div>
+
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+    <!-- BEGIN PAGE CONTAINER-->
+
+    <div class="container-fluid">
+
+        <!-- BEGIN PAGE HEADER-->
+
+        <div class="row-fluid">
+
+            <div class="span12">
+
+                <!-- BEGIN STYLE CUSTOMIZER -->
+
+
+
+                <!-- END BEGIN STYLE CUSTOMIZER -->
+
+                <h3 class="page-title">
+
+
+                </h3>
+
+                <ul class="breadcrumb">
+
+                    <li>
+
+                        <i class="icon-home"></i>
+
+                        <a href="index.html">首页</a>
+
+                        <span class="icon-angle-right"></span>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#">新增物品</a>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- END PAGE HEADER-->
+
+        <!-- BEGIN PAGE CONTENT-->
+
+
+
+        <div class="row-fluid" id="app">
+
+            <div class="span12">
+
+                <!-- BEGIN VALIDATION STATES-->
+
+                <div class="portlet box green">
+
+                    <div class="portlet-title">
+
+                        <div class="caption"><i class="icon-reorder"></i>新增物品</div>
+
+
+                    </div>
+
+                    <div class="portlet-body form">
+
+                        <!-- BEGIN FORM-->
+
+
+                        <form action="#" id="form_sample_2" class="form-horizontal">
+
+                            <div class="alert alert-error hide">
+
+                                <button class="close" data-dismiss="alert"></button>
+
+                                You have some form errors. Please check below.
+
+                            </div>
+
+                            <div class="control-group">
+
+                                <label class="control-label"><span class="required"></span></label>
+
+                                <div class="controls">
+
+                                    <div class="layui-upload">
+                                        <div class="layui-upload-list">
+                                            <input type="hidden" name="filename" id="filename" value="noimg.jpg"/>
+                                            <img class="layui-upload-img" id="imgname" style="width: 10%">
+                                            <p id="demoText"></p>
+                                        </div>
+                                        <button type="button" class="layui-btn" id="test1"><i class="layui-icon"></i>上传图片</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="control-group">
+
+                                <label class="control-label">物品名称<span class="required">*</span></label>
+
+                                <div class="controls">
+
+                                    <input v-model="name" type="text" class="span6 m-wrap"/>
+
+                                </div>
+
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">一级类目<span class="required">*</span></label>
+                                <div class="controls">
+                                    <select v-model="categoryid" class="span3 m-wrap" @change="getchildlist('')" >
+                                        <option value="">请选择一级类目 </option>
+                                        <option v-for="fcategory in fatherlist" :value="fcategory.id">{{fcategory.name}} </option>
+                                    </select>
+
+                                    <select v-model="childid" class="span3 m-wrap" >
+                                        <option value="">请选择二级级类目 </option>
+                                        <option v-for="ccategory in childlist" :value="ccategory.id">{{ccategory.name}} </option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="control-group">
+                                <label class="control-label">价格<span class="required">*</span></label>
+                                <div class="controls">
+                                    <input v-model="price" type="text" class="span6 m-wrap"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">物品描述<span class="required">*</span></label>
+                                <div class="controls">
+                                    <textarea name="content" id="editor_id" style="display: block;width: 100%;height: 300px;"></textarea>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-actions">
+
+                                <a type="submit" @click="edit()" class="btn green">保存</a>
+
+                                <a type="button" @click="clean()"  class="btn">清除</a>
+
+                            </div>
+
+                        </form>
+
+                        <!-- END FORM-->
+
+                    </div>
+
+                </div>
+
+                <!-- END VALIDATION STATES-->
+
+            </div>
+
+        </div>
+
+        <!-- END PAGE CONTENT-->
+
+    </div>
+
+    <!-- END PAGE CONTAINER-->
+
+</div>
+</body>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var qs = Qs
+    var id = UrlParam.paramValues("id").toString()
+    var vmm = new Vue({
+        el: '#app',
+        data: {
+            filename:"",
+            name:"",
+            categoryid:"",
+            childid:"",
+            price:"",
+            content:"",
+            fatherlist:[],
+            childlist:[],
+            id:id,
+            product:"",
+        },
+        mounted(){
+            this.show()
+            this.getfatherlist()
+            layui.use('upload', function(){
+                var $ = layui.jquery
+                    ,upload = layui.upload;
+
+                //普通图片上传
+                var uploadInst = upload.render({
+                    elem: '#test1'
+                    ,url: '../admin/uploadImg.do' //改成您自己的上传接口
+                    ,done: function(res){
+                        //如果上传失败
+                        console.log(res)
+                        $("#filename").val(res.data.src)
+                        $('#imgname').attr('src', "../upload/"+res.data.src); //图片链接（base64）
+                        if(res.code > 0){
+                            return layer.msg('上传失败');
+                        }
+                        //上传成功
+                    }
+                });
+            });
+        },
+        methods: {
+            show(){
+                axios.post('productShow.do',qs.stringify({
+                    id:this.id,
+                })).then(response =>{
+                    this.product = response.data.product
+                    this.name = this.product.name
+                    this.categoryid = this.product.categoryid
+                    this.childid = this.product.childid
+                    this.price = this.product.price
+                    this.filename = this.product.filename
+                    this.content = this.product.content
+                    $("#filename").val(this.filename)
+                    $('#imgname').attr('src', "../upload/"+this.filename); //图片链接（base64）
+                    this.getchildlist(this.childid)
+                    window.editor.html(this.content)
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+            edit() {
+                this.filename = $("#filename").val()
+                this.content = window.editor.html()
+                if(this.name==""){
+                    layer.msg("物品名称不能为空",{icon:5})
+                    return false;
+                }
+                if(this.categoryid==""){
+                    layer.msg("请选择一级类目",{icon:5})
+                    return false;
+                }
+                if(this.childid==""){
+                    layer.msg("请选择二级类目",{icon:5})
+                    return false;
+                }
+                if(this.price==""||!/^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/.test(this.price)){
+                    layer.msg("价格输入错误",{icon:5})
+                    return false;
+                }
+
+                axios.post('productEdit.do',qs.stringify({
+                    filename:this.filename,
+                    name:this.name,
+                    categoryid:this.categoryid,
+                    childid:this.childid,
+                    price:this.price,
+                    content:this.content,
+                    id:this.id,
+                })).then(response =>{
+                    location.replace("productlist.html")
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+            getchildlist(childid){
+                this.childid=childid
+                if(this.categoryid==""){
+                    this.childlist=""
+                    return false
+                }
+                axios.post('searchchildlist.do',qs.stringify({
+                    categoryid:this.categoryid,
+                })).then(response =>{
+                    this.childlist = response.data.childlist
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+            getfatherlist(){
+                axios.post('../admin/categoryList.do',qs.stringify({
+                })).then(response =>{
+                    this.fatherlist = response.data.list
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+            clean(){
+                this.name=""
+                this.categoryid=""
+                this.childid=""
+                this.price=""
+                this.oldprice=""
+            },
+
+
+
+        }
+    });
+</script>
+
+</html>

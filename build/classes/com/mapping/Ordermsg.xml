@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OrdermsgDAO">
+    <resultMap id="BaseResultMap" type="com.bean.Ordermsg">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="ddno" jdbcType="VARCHAR" property="ddno"/>
+        <result column="memberid" jdbcType="INTEGER" property="memberid"/>
+        <result column="productid" jdbcType="INTEGER" property="productid"/>
+        <result column="stime" jdbcType="VARCHAR" property="stime"/>
+        <result column="etime" jdbcType="VARCHAR" property="etime"/>
+        <result column="total" jdbcType="DOUBLE" property="total"/>
+        <result column="yjprice" jdbcType="DOUBLE" property="yjprice"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="sellerid" jdbcType="INTEGER" property="sellerid"/>
+    </resultMap>
+
+    <insert id="add" parameterType="Ordermsg">
+      insert into Ordermsg values(null,#{ddno},#{memberid},#{productid},#{stime},#{etime},#{total},#{yjprice},#{content},#{status},#{sellerid})
+    </insert>
+
+
+    <select id="selectAll" parameterType="hashmap" resultMap="BaseResultMap">
+        select * from Ordermsg where 1=1
+        <if test="key!=null and key!=''">
+            and ddno like "%"#{key}"%"
+        </if>
+        <if test="memberid!=null and memberid!=''">
+            and memberid=#{memberid}
+        </if>
+        <if test="sellerid!=null and sellerid!=''">
+            and sellerid=#{sellerid}
+        </if>
+        <if test="productid!=null and productid!=''">
+            and productid=#{productid}
+        </if>
+        <if test="status!=null and status!=''">
+            and status=#{status}
+        </if>
+        order by id desc
+    </select>
+
+    <select id="findById" parameterType="com.bean.Ordermsg" resultType="com.bean.Ordermsg">
+        select * from ordermsg where id=#{id}
+    </select>
+
+    <update id="update" parameterType="com.bean.Ordermsg">
+        update ordermsg
+        <set>
+            <if test="status!=null and status!=''">
+                status=#{status},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+      delete from Ordermsg where id=#{id}
+    </delete>
+
+
+</mapper>

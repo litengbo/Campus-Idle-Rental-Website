@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- Head BEGIN -->
+<head>
+  <meta charset="utf-8">
+  <title>校园闲置物品租赁平台</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta content="Metronic Shop UI description" name="description">
+  <meta content="Metronic Shop UI keywords" name="keywords">
+  <meta content="keenthemes" name="author">
+
+  <meta property="og:site_name" content="-CUSTOMER VALUE-">
+  <meta property="og:title" content="-CUSTOMER VALUE-">
+  <meta property="og:description" content="-CUSTOMER VALUE-">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
+  <meta property="og:url" content="-CUSTOMER VALUE-">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- Fonts START -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"> 
+  <!-- Fonts END -->
+
+  <!-- Global styles START -->          
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+  <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+  <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link href="assets/pages/css/components.css" rel="stylesheet">
+  <link href="assets/corporate/css/style.css" rel="stylesheet">
+  <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+  <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
+  <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+  <link href="assets/corporate/css/custom.css" rel="stylesheet">
+
+
+    <!-- Theme styles END -->
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+    <!-- BEGIN STYLE CUSTOMIZER -->
+    <div class="color-panel hidden-sm">
+      <div class="color-mode-icons icon-color"></div>
+      <div class="color-mode-icons icon-color-close"></div>
+      <div class="color-mode">
+        <p>THEME COLOR</p>
+        <ul class="inline">
+          <li class="color-red current color-default" data-style="red"></li>
+          <li class="color-blue" data-style="blue"></li>
+          <li class="color-green" data-style="green"></li>
+          <li class="color-orange" data-style="orange"></li>
+          <li class="color-gray" data-style="gray"></li>
+          <li class="color-turquoise" data-style="turquoise"></li>
+        </ul>
+      </div>
+    </div>
+    <!-- END BEGIN STYLE CUSTOMIZER --> 
+
+    <!-- BEGIN TOP BAR -->
+    <div class="pre-header" id="loginiframe">
+
+    </div>
+    <!-- END TOP BAR -->
+
+    <!-- BEGIN HEADER -->
+    <div class="header">
+        <div class="container" id="headeriframe">
+            <!-- BEGIN CART -->
+            <!--END CART -->
+            <!-- BEGIN NAVIGATION -->
+            <!-- END NAVIGATION -->
+        </div>
+    </div>
+    <!-- Header END -->
+
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="index.html">首页</a></li>
+            <li class="active">注册</li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <!-- BEGIN CHECKOUT PAGE -->
+            <div class="panel-group checkout-page accordion scrollable" id="checkout-page">
+              <div id="payment-address" class="panel panel-default">
+                <div class="panel-heading">
+                  <h2 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#checkout-page" href="#payment-address-content" class="accordion-toggle">
+                      注册
+                    </a>
+                  </h2>
+                </div>
+                <div id="payment-address-content" class="panel-collapse collapse in">
+                  <div class="panel-body row" id="app">
+                    <div class="col-md-6 col-sm-6">
+                      <h3>请在下方填写您的信息</h3>
+
+
+                      <div class="form-group">
+
+                          <div class="layui-upload">
+                              <div class="layui-upload-list">
+                                  <input type="hidden" name="filename" id="filename" value="noimg.jpg"/>
+                                  <img class="layui-upload-img" id="imgname" style="width: 10%">
+                                  <p id="demoText"></p>
+                              </div>
+                              <button type="button" class="layui-btn" id="test1"><i class="layui-icon"></i>上传头像</button>
+                          </div>
+
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="uname">学号 <span class="require">*</span></label>
+                        <input type="text" id="uname" v-model="uname" @blur="checkUname()" class="form-control">
+                      </div>
+
+                        <div class="form-group">
+                            <label for="uname">密码 <span class="require">*</span></label>
+                            <input type="password" id="upass" v-model="upass"  class="form-control">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="tname">姓名 <span class="require">*</span></label>
+                            <input type="text" id="tname" v-model="tname" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tname">性别 <span class="require">*</span></label>
+                            <select v-model="sex" class="form-control">
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birthtime">生日 <span class="require">*</span></label>
+                            <input type="date" id="birthtime" name="birthtime" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birthtime">身份证 <span class="require">*</span></label>
+                            <input type="text" id="idcard" v-model="idcard" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birthtime">电话 <span class="require">*</span></label>
+                            <input type="text" id="tel" v-model="tel" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">邮箱 <span class="require">*</span></label>
+                            <input type="text" id="email" v-model="email" class="form-control">
+                        </div>
+                    </div>
+
+                      <div class="col-md-12">
+                          <button @click="reg" class="btn btn-primary  pull-left"  data-toggle="collapse" data-parent="#checkout-page" data-target="#shipping-address-content" id="button-payment-address">注册</button>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- END PAYMENT ADDRESS -->
+
+              <!-- BEGIN SHIPPING ADDRESS -->
+
+              <!-- END SHIPPING ADDRESS -->
+
+              <!-- BEGIN SHIPPING METHOD -->
+
+              <!-- END SHIPPING METHOD -->
+
+              <!-- BEGIN PAYMENT METHOD -->
+
+              <!-- END PAYMENT METHOD -->
+
+              <!-- BEGIN CONFIRM -->
+
+              <!-- END CONFIRM -->
+            </div>
+            <!-- END CHECKOUT PAGE -->
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+
+    <!-- BEGIN STEPS -->
+    <!-- END STEPS -->
+
+    <!-- BEGIN PRE-FOOTER -->
+
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer" id="footiframe">
+
+    </div>
+    <!-- END FOOTER -->
+
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>  
+    <![endif]-->
+    <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+    <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src='assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+    <script src="assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+    <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+
+    <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
+    <script src="assets/pages/scripts/checkout.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+</body>
+
+<script type="text/javascript" src="axios/vue.js"></script>
+<script type="text/javascript" src="axios/axios.min.js"></script>
+<script type="text/javascript" src="axios/qs.js"></script>
+<script type="text/javascript" src="axios/getUrlParams.js"></script>
+<script type="text/javascript" src="layer/layer.js"></script>
+<script type="text/javascript" src="layui/layui.js"></script>
+<script type="text/javascript">
+    window.onload=function(){
+        $("#loginiframe").load("iframe/loginiframe.html")
+        $("#headeriframe").load("iframe/headeriframe.html")
+        $("#footiframe").load("iframe/footiframe.html")
+    }
+
+</script>
+
+<script type="text/javascript">
+    var qs = Qs
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            uname:"",
+            upass:"",
+            tname:"",
+            sex:"男",
+            birthtime:"",
+            idcard:"",
+            tel:"",
+            email:"",
+            filename:"",
+
+        },
+        mounted(){
+            layui.use('upload', function(){
+                var $ = layui.jquery
+                    ,upload = layui.upload;
+
+                //普通图片上传
+                var uploadInst = upload.render({
+                    elem: '#test1'
+                    ,url: 'admin/uploadImg.do' //改成您自己的上传接口
+                    ,done: function(res){
+                        //如果上传失败
+                        console.log(res)
+                        $("#filename").val(res.data.src)
+                        $('#imgname').attr('src', "upload/"+res.data.src); //图片链接（base64）
+                        if(res.code > 0){
+                            return layer.msg('上传失败');
+                        }
+                        //上传成功
+                    }
+                });
+            });
+        },
+        methods:{
+            reg(){
+                this.filename = $("#filename").val()
+                this.birthtime = $("#birthtime").val()
+
+                if(this.filename==""){
+                    layer.msg("请上传头像",{icon:5})
+                    return false;
+                }
+                /* 学号不能为空的提示 */
+                if (this.uname ==""){
+               	 layer.msg("学号不能为空",{icon:5})
+               	 return false;
+               } 
+                /* 学号的正则表达式 */
+                if (!/^[20]{2}[12]{1}[01789]{1}[0-9]{8}$/.test(this.uname)){
+                	layer.msg("学号输入错误",{icon:5})
+                	return false;
+                } 
+                
+                if(this.upass==""){
+                    layer.msg("密码不能为空",{icon:5})
+                    return false;
+                }
+                if (this.upass.length<8){
+                	layer.msg("密码长度过短，至少填写八位",{icon:5})
+                	return false;
+                }
+                if(this.tname == ""){
+                    layer.msg("姓名不能为空",{icon:5})
+                    return false;
+                }
+                if(this.brithtime == ""){
+                    layer.msg("生日不能为空",{icon:5})
+                    return false;
+                }
+                if(this.idcard == ""){
+                	layer.msg("身份证号不能为空",{icon:5})
+                	return false;
+                }
+                if(!/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(this.idcard)){
+                    layer.msg("身份证输入错误",{icon:5})
+                    return false;
+                }
+                if(this.tel == ""){
+                	layer.msg("电话号码不能为空",{icon:5})
+                	return false; 
+                }
+                if(!/^[1][3,4,5,7,8][0-9]{9}$/.test(this.tel)){
+                    layer.msg("电话输入错误",{icon:5})
+                    return false;
+                }
+                if(this.email == ""){
+                	layer.msg("邮箱地址不能为空",{icon:5})
+                	return false; 
+                }
+                if(!/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(this.email)){
+                    layer.msg("邮箱输入错误",{icon:5})
+                    return false;
+                }
+                axios.post('register.do',qs.stringify({
+                    uname:this.uname,
+                    upass:this.upass,
+                    tname:this.tname,
+                    sex:this.sex,
+                    birthtime:this.birthtime,
+                    idcard:this.idcard,
+                    tel:this.tel,
+                    filename:this.filename,
+                    email:this.email,
+                })).then(response =>{
+                      layer.msg("注册成功",{icon:6})
+                    this.uname = ""
+                    this.upass=""
+                    this.tname=""
+                    this.tel=""
+                    this.email=""
+                    this.idcard=""
+                    $("#birthtime").val("")
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+            checkUname(){
+                if(this.uname==""){
+                    return false;
+                }
+                axios.post('checkUname.do',qs.stringify({
+                    uname:this.uname,
+                })).then(response =>{
+                    if(response.data.data==400){
+                        layer.msg("用户已被注册，请更换",{icon:5})
+                        /* this.uname = "" */
+                    }
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+            quxiao(){
+                this.uname =""
+                this.upass=""
+                this.tname=""
+                this.email=""
+                $("#birthtime").val("")
+            },
+
+
+        }
+    })
+</script>
+
+<!-- END BODY -->
+</html>

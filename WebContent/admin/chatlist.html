@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <meta content="" name="description" />
+
+    <meta content="" name="author" />
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+    <link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+
+    <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+
+    <link href="media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+    <link href="media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+
+    <link href="media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <link href="media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <!-- END PAGE LEVEL STYLES -->
+
+    <link rel="shortcut icon" href="media/image/favicon.ico" />
+
+
+
+
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <script type="text/javascript" src="../axios/vue.js"></script>
+    <script type="text/javascript" src="../axios/axios.min.js"></script>
+    <script type="text/javascript" src="../axios/qs.js"></script>
+    <script type="text/javascript" src="../axios/getUrlParams.js"></script>
+    <script type="text/javascript" src="../layer/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="../layer/layer.js"></script>
+
+
+</head>
+<body>
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- BEGIN PAGE HEADER-->
+
+        <div class="row-fluid">
+
+            <div class="span12">
+
+                <!-- BEGIN STYLE CUSTOMIZER -->
+
+
+                <!-- END BEGIN STYLE CUSTOMIZER -->
+
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                <h3 class="page-title">
+
+
+                </h3>
+
+                <ul class="breadcrumb">
+
+                    <li>
+
+                        <i class="icon-home"></i>
+
+                        <a href="index.html">首页</a>
+
+                        <i class="icon-angle-right"></i>
+
+                    </li>
+
+                    <li>
+                        <a href="#">留言管理</a>
+
+                    </li>
+
+
+                </ul>
+
+                <!-- END PAGE TITLE & BREADCRUMB-->
+
+            </div>
+
+        </div>
+
+        <!-- END PAGE HEADER-->
+
+        <!-- BEGIN PAGE CONTENT-->
+
+        <div class="row-fluid" id="app">
+
+            <div class="span12">
+
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+                <div class="portlet box light-grey" style="border-top:1px solid #eee;">
+
+
+                    <div class="portlet-body">
+
+                        <div class="clearfix">
+
+                            <div class="btn-group">
+
+
+                                <div>
+
+                                    <input type="text" v-model="key" placeholder="用户..."  style="margin-top: 10px;"/>
+
+
+
+                                    <a @click="getchatlist()" id="sample_editable_1_new" class="btn green" style="margin: 0px 5px;">
+
+                                        搜索 <i class="icon-search"></i>
+
+                                    </a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <table class="table table-striped table-bordered table-hover" id="sample_1">
+
+                            <thead>
+
+                            <tr>
+
+                                <th>留言人</th>
+                                <th>留言内容</th>
+                                <th>留言时间</th>
+                                <th>回复内容</th>
+                                <th>操作</th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                            <tr v-for="chat in chatlist" class="odd gradeX">
+
+
+                                <td>{{chat.member.tname}}</td>
+                                <td>{{chat.content}}</td>
+                                <td>{{chat.savetime}}</td>
+                                <td>{{chat.hfcontent}}</td>
+                                <td style="width: 20%">
+                                    <a v-if="chat.hfcontent==null ||chat.hfcontent==''" href="javascript:;" @click="huifu(chat.id)"><span class="layui-badge layui-bg-green">回复</span></a>
+                                    <a href="javascript:;" @click="del(chat.id)"><span class="layui-badge">删除</span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="8"><div id="demo1" style="text-align:center"></div></td>
+                            </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <!-- END EXAMPLE TABLE PORTLET-->
+
+            </div>
+
+        </div>
+
+
+
+        <!-- END PAGE CONTENT-->
+
+    </div>
+
+    <!-- END PAGE CONTAINER-->
+
+</div>
+</body>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var qs = Qs
+    var vmm = new Vue({
+        el: '#app',
+        data: {
+            chatlist:[],
+            key: '',
+            pageSize:10,
+
+        },
+        mounted(){
+            this.getchatlist()
+        },
+        methods: {
+            getchatlist() {
+                axios.post('chatList.do',qs.stringify({
+                    key:this.key,
+                    pageSize:this.pageSize
+                })).then(response =>{
+                    layui.use(['laypage', 'layer'], function(){
+                        var laypage = layui.laypage
+                            ,layer = layui.layer;
+                        //总页数大于页码总数
+                        laypage.render({
+                            elem: 'demo1'
+                            ,limit:vmm.pageSize
+                            ,count: response.data.list.length //数据总数
+                            ,jump: function(obj,first){
+                                vmm.current_page(obj.curr,vmm.pageSize)
+                                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                            }
+                        });
+                    });
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+            current_page(page,pageSize){
+                axios.post('chatList.do',qs.stringify({
+                    key:this.key,
+                    pageNum:page,
+                    pageSize:pageSize,
+                })).then(response =>{
+                    this.chatlist = response.data.pageInfo.list
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+            huifu(id){
+                var index = layer.open({
+                    title:"留言回复",
+                    type:2,
+                    area:['500px','400px'],
+                    maxmin:true,
+                    content:"chatedit.html?id="+id
+                })
+            },
+
+            del(id){
+                axios.post("chatDel.do",qs.stringify({
+                    id:id,
+                })).then(response =>{
+                    this.getchatlist()
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+        }
+    });
+</script>
+
+</html>

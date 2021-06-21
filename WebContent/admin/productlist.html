@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+	<meta content="" name="description" />
+
+	<meta content="" name="author" />
+
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES --> 
+
+	<link href="media/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+	<link href="media/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
+
+	<link href="media/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="media/image/favicon.ico" />
+	
+	
+	
+		
+<link rel="stylesheet" href="../layui/css/layui.css"  media="all">	
+<script type="text/javascript" src="../axios/vue.js"></script>
+<script type="text/javascript" src="../axios/axios.min.js"></script>
+<script type="text/javascript" src="../axios/qs.js"></script>
+<script type="text/javascript" src="../axios/getUrlParams.js"></script>
+<script type="text/javascript" src="../layer/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="../layer/layer.js"></script>
+
+	
+</head>
+<body>
+<div class="page-content">
+			<div class="container-fluid">
+
+				<!-- BEGIN PAGE HEADER-->
+
+				<div class="row-fluid">
+
+					<div class="span12">
+
+						<!-- BEGIN STYLE CUSTOMIZER -->
+
+
+						<!-- END BEGIN STYLE CUSTOMIZER -->  
+
+						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+						<h3 class="page-title">
+
+
+						</h3>
+
+						<ul class="breadcrumb">
+
+							<li>
+
+								<i class="icon-home"></i>
+
+								<a href="index.html">首页</a> 
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+
+							<li>
+								<a href="#">物品列表</a>
+
+							</li>
+
+
+						</ul>
+
+						<!-- END PAGE TITLE & BREADCRUMB-->
+
+					</div>
+
+				</div>
+
+				<!-- END PAGE HEADER-->
+
+				<!-- BEGIN PAGE CONTENT-->
+
+				<div class="row-fluid" id="app">
+
+					<div class="span12">
+
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+						<div class="portlet box light-grey" style="border-top:1px solid #eee;">
+
+
+							<div class="portlet-body">
+
+								<div class="clearfix">
+
+									<div class="btn-group">
+									
+									 
+									<div>
+									
+									<input type="text" v-model="key" placeholder="物品名称..."  style="margin-top: 10px;"/>
+
+
+                                        <select v-model="categoryid" @change="getchildlist()" class="span6 m-wrap" style="margin: 10px 0px 10px 5px;height: 20px !important;width: 30%" >
+
+                                            <option value="">请选择一级类目 </option>
+
+                                            <option v-for="fcategory in fatherlist" :value="fcategory.id">{{fcategory.name}}</option>
+
+                                        </select>
+
+                                        <select v-model="childid" class="span6 m-wrap" style="margin: 10px 0px 10px 5px;height: 20px !important;width: 30%" >
+
+                                            <option value="">请选择二级类目 </option>
+
+                                            <option v-for="ccategory in childlist" :value="ccategory.id">{{ccategory.name}}</option>
+
+                                        </select>
+
+										<a @click="getproductlist()" id="sample_editable_1_new" class="btn green" style="margin: 0px 5px;">
+										
+										搜索 <i class="icon-search"></i>
+
+										</a>
+										
+									</div>
+
+									</div>
+
+
+								</div>
+
+								<table class="table table-striped table-bordered table-hover" id="sample_1">
+
+									<thead>
+
+										<tr>
+
+											<th class="hidden-480">图片</th>
+											<th>名称</th>
+											<th>类别</th>
+                                            <th>价格</th>
+											<th>状态</th>
+                                            <th>是否上架</th>
+                                            <th>审核状态</th>
+											<th>操作</th>
+										</tr>
+
+									</thead>
+
+									<tbody>
+
+										<tr v-for="product in productlist" class="odd gradeX">
+
+
+											<td class="hidden-480"><img :src="['../upload/'+product.filename]" style="width: 40px"></td>
+											<td>{{product.name}}</td>
+											<td>{{product.fcategory.name}}/{{product.ccategory.name}}</td>
+                                            <td>{{product.price}}</td>
+											<td>{{product.status}}</td>
+                                            <td>{{product.issj}}</td>
+                                            <td>{{product.shstatus}}</td>
+											
+											<td style="width: 20%">
+                                                <a v-if="product.issj=='no'" href="javascript:;" @click="issjedit(product.id)"><span class="layui-badge layui-bg-blue">上架</span></a>
+                                                <a v-if="product.issj=='yes'" href="javascript:;" @click="issjedit(product.id)"><span class="layui-badge layui-bg-blue">下架</span></a>
+
+                                                <a v-if="product.shstatus=='待审核'" href="javascript:;" @click="shstatusedit(product.id,'通过审核')"><span class="layui-badge layui-bg-green">通过</span></a>
+                                                <a v-if="product.shstatus=='待审核'" href="javascript:;" @click="shstatusedit(product.id,'拒绝')"><span class="layui-badge layui-bg-green">拒绝</span></a>
+
+											<a href="javascript:;" @click="del(product.id)"><span class="layui-badge">删除</span></a>
+											</td>
+										</tr>
+										<tr>
+										  <td colspan="9"><div id="demo1" style="text-align:center"></div></td>
+										</tr>
+
+
+
+
+
+
+
+									</tbody>
+
+								</table>
+
+							</div>
+
+						</div>
+
+						<!-- END EXAMPLE TABLE PORTLET-->
+
+					</div>
+
+				</div>
+
+				
+
+				<!-- END PAGE CONTENT-->
+
+			</div>
+
+			<!-- END PAGE CONTAINER-->
+
+		</div>
+</body>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+	var qs = Qs
+    var vmm = new Vue({
+        el: '#app',
+        data: {
+            productlist:[],
+            fatherlist:[],
+            childlist:[],
+            categoryid:"",
+            childid:"",
+            key: '',
+            pageSize:10,
+
+        },
+        mounted(){
+            this.getproductlist()
+            this.getfatherlist()
+        },
+        methods: {
+            //当前用户列表
+            getproductlist() {
+                axios.post('productList.do',qs.stringify({
+                    key:this.key,
+                    categoryid:this.categoryid,
+                    childid:this.childid,
+                    pageSize:this.pageSize
+                })).then(response =>{
+                    layui.use(['laypage', 'layer'], function(){
+                        var laypage = layui.laypage
+                            ,layer = layui.layer;
+                        //总页数大于页码总数
+                        laypage.render({
+                            elem: 'demo1'
+                            ,limit:vmm.pageSize
+                            ,count: response.data.list.length //数据总数
+                            ,jump: function(obj,first){
+                                vmm.current_page(obj.curr,vmm.pageSize)
+                                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                            }
+                        });
+                    });
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+            current_page(page,pageSize){
+                axios.post('productList.do',qs.stringify({
+                    key:this.key,
+                    categoryid:this.categoryid,
+                    childid:this.childid,
+                    pageNum:page,
+                    pageSize:pageSize,
+                })).then(response =>{
+                    this.productlist = response.data.pageInfo.list
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+            
+
+            del(id){
+            	axios.post("productDel.do",qs.stringify({
+            		id:id,
+            	})).then(response =>{
+            	    this.getproductlist()
+            	}).catch(error =>{
+            		console.log(error)
+            	})
+            },
+
+
+            issjedit(id){
+                axios.post("../member/issjedit.do",qs.stringify({
+                    id:id,
+                })).then(response =>{
+                    this.getproductlist()
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+            shstatusedit(id,flag){
+                axios.post("shstatusedit.do",qs.stringify({
+                    id:id,
+                    flag:flag,
+                })).then(response =>{
+                    this.getproductlist()
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+            getfatherlist(){
+                axios.post('categoryList.do',qs.stringify({
+                })).then(response =>{
+                    this.fatherlist = response.data.list
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+            getchildlist(){
+                this.childid=""
+                if(this.categoryid==""){
+                    this.childlist=""
+                    return false
+                }
+                axios.post('../member/searchchildlist.do',qs.stringify({
+                    categoryid:this.categoryid,
+                })).then(response =>{
+                    this.childlist = response.data.childlist
+                    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                    console.log(this.childlist)
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+            
+        }
+    });
+</script>
+
+</html>

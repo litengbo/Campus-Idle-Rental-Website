@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ProductDAO">
+    <resultMap id="BaseResultMap" type="com.bean.Product">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="filename" jdbcType="VARCHAR" property="filename"/>
+        <result column="categoryid" jdbcType="INTEGER" property="categoryid"/>
+        <result column="childid" jdbcType="INTEGER" property="childid"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="delstatus" jdbcType="VARCHAR" property="delstatus"/>
+        <result column="sellerid" jdbcType="INTEGER" property="sellerid"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="issj" jdbcType="VARCHAR" property="issj"/>
+        <result column="shstatus" jdbcType="VARCHAR" property="shstatus"/>
+    </resultMap>
+
+
+    <insert id="add" parameterType="Product">
+        insert into Product values(null,#{name},#{filename},#{categoryid},#{childid},#{price},#{content},#{sellerid},#{status},#{issj},#{shstatus})
+    </insert>
+
+
+    <update id="update" parameterType="Product">
+        update Product
+        <set>
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="filename!=null and filename!=''">filename=#{filename},</if>
+            <if test="categoryid!=null and categoryid!=''">categoryid=#{categoryid},</if>
+            <if test="childid!=null and childid!=''">childid=#{childid},</if>
+            <if test="price &gt; 0">price=#{price},</if>
+            <if test="content!=null and content!=''">content=#{content},</if>
+            <if test="status!=null and status!=''">status=#{status},</if>
+            <if test="issj!=null and issj!=''">issj=#{issj},</if>
+            <if test="shstatus!=null and shstatus!=''">shstatus=#{shstatus},</if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <select id="selectAll" parameterType="HashMap" resultMap="BaseResultMap">
+        select * from Product where 1=1
+        <if test="key!=null and key!=''">and name like "%"#{key}"%"</if>
+        <if test="categoryid!=null and categoryid!=''"> and categoryid=#{categoryid}</if>
+        <if test="childid!=null and childid!=''"> and childid=#{childid}</if>
+        <if test="sellerid!=null and sellerid!=''"> and sellerid=#{sellerid}</if>
+        <if test="shstatus!=null and shstatus!=''"> and shstatus=#{shstatus}</if>
+        <if test="issj!=null and issj!=''"> and issj=#{issj}</if>
+        <if test="cwsellerid!=null and cwsellerid!=''"> and sellerid!=#{cwsellerid}</if>
+        order by id desc 
+    </select>
+
+
+    <select id="findById" parameterType="int" resultType="Product">
+      select * from Product where id=#{id}
+    </select>
+
+    <delete id="delete" parameterType="int">
+      delete from product where id=#{id}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="layui/css/layui.css" rel="stylesheet">
+
+    <script type="text/javascript" src="layer/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="laydate/laydate.js"></script>
+    <script type="text/javascript">
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#etime'
+            ,min:minDate()
+        });
+
+        // 设置最小可选的日期
+        function minDate(){
+            var now = new Date();
+            return now.getFullYear()+"-" + (now.getMonth()+1) + "-" + now.getDate();
+        }
+
+
+    </script>
+</head>
+<body>
+<div style="padding: 20px;" id="app">
+    <form class="layui-form" action="">
+
+
+
+
+        <div class="layui-form-item">
+            <input type="text" name="etime" id="etime" required  lay-verify="required" placeholder="归还时间" autocomplete="off" class="layui-input">
+        </div>
+
+        <div class="layui-form-item">
+            <input type="text" v-model="yjprice" id="yjprice" required  lay-verify="required" placeholder="押金" autocomplete="off" class="layui-input">
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+                <textarea v-model="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+        </div>
+
+
+        <div class="layui-form-item">
+            <a class="layui-btn" lay-submit lay-filter="formDemo" @click="add()">立即提交</a>
+        </div>
+
+
+    </form>
+
+</div>
+
+<script type="text/javascript" src="axios/vue.js"></script>
+<script type="text/javascript" src="axios/axios.min.js"></script>
+<script type="text/javascript" src="axios/qs.js"></script>
+<script type="text/javascript" src="axios/getUrlParams.js"></script>
+<script type="text/javascript" src="layer/layer.js"></script>
+<script type="text/javascript" src="layui/layui.js"></script>
+
+<script type="text/javascript">
+    var qs = Qs
+    var productid = UrlParam.paramValues("productid").toString()
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            etime:"",
+            content:"",
+            yjprice:"",
+            productid:productid,
+        },
+        mounted(){
+
+        },
+        methods:{
+            add(){
+                this.etime = $("#etime").val()
+                if(this.etime==""){
+                    layer.msg("归还时间不能为空",{icon:5})
+                    return false
+                }
+
+
+                if(!/^[1-9]\d*$/.test(this.yjprice)){
+                    layer.msg("押金输入错误",{icon:5})
+                    return false
+                }
+                axios.post('ordermsgAdd.do',qs.stringify({
+                    productid:this.productid,
+                    etime:this.etime,
+                    yjprice:this.yjprice,
+                    content:this.content,
+                })).then(response =>{
+                    if(response.data.data==200){
+                        layer.alert("请求成功，等待物品主人同意！",{icon:6},function(){
+                            //parent.location.reload(true)
+                            parent.layer.closeAll()
+                        })
+                    }else{
+                        layer.alert("余额不足,请充值",{icon:5},function(){
+                            //parent.location.reload(true)
+                            parent.layer.closeAll()
+                        })
+                    }
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+        }
+    })
+</script>
+</body>
+</html>

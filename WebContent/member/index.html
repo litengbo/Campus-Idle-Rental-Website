@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head>
+
+	<meta charset="utf-8" />
+
+	<title>校园闲置物品租赁平台</title>
+
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+	<meta content="" name="description" />
+
+	<meta content="" name="author" />
+
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+
+	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+
+	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+
+	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+
+	<!-- END PAGE LEVEL STYLES -->
+
+	<link rel="shortcut icon" href="media/image/favicon.ico" />
+	
+	
+<script type="text/javascript" src="../axios/vue.js"></script>
+<script type="text/javascript" src="../axios/axios.min.js"></script>
+<script type="text/javascript" src="../axios/qs.js"></script>
+<script type="text/javascript" src="../axios/getUrlParams.js"></script>
+<script type="text/javascript" src="../layer/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="../layer/layer.js"></script>
+
+</head>
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed" >
+
+	<!-- BEGIN HEADER -->
+
+	<div class="header navbar navbar-inverse navbar-fixed-top" id="topiframe">
+
+		<!-- BEGIN TOP NAVIGATION BAR -->
+		<!-- END TOP NAVIGATION BAR -->
+	</div>
+
+	<!-- END HEADER -->
+
+	<!-- BEGIN CONTAINER -->
+
+	<div class="page-container row-fluid">
+
+		<!-- BEGIN SIDEBAR -->
+
+		<div class="page-sidebar nav-collapse collapse" id="appleft">
+
+			<!-- BEGIN SIDEBAR MENU -->        
+
+			<ul class="page-sidebar-menu">
+
+
+				<li class="start ">
+
+					<a href="index.html">
+
+					<i class="icon-home"></i> 
+
+					<span class="title">首页</span>
+
+					</a>
+
+				</li>
+
+				<li class="active">
+
+					<a href="javascript:;">
+
+					<i class="icon-th"></i> 
+
+					<span class="title">业务管理</span>
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
+
+					</a>
+
+					<ul class="sub-menu">
+
+
+
+						
+						<li>
+
+							<a href="javascript:;" @click="skip('productlist.html',$event)">物品管理</a>
+
+						</li>
+						
+                        <li  >
+
+                            <a  href="javascript:;" @click="skip('orderlist.html',$event)">租用订单</a>
+
+                        </li>
+
+                        <li  >
+
+                            <a  href="javascript:;" @click="skip('orderlb.html',$event)">租出订单</a>
+
+                        </li>
+
+                        <li  >
+
+                            <a  href="javascript:;" @click="skip('messagelist.html',$event)">评论管理</a>
+
+                        </li>
+
+
+
+					</ul>
+
+				</li>
+
+				
+
+				
+
+				
+
+			</ul>
+
+			<!-- END SIDEBAR MENU -->
+
+		</div>
+
+		<!-- END SIDEBAR -->
+
+		<!-- BEGIN PAGE -->
+
+		<!-- iframe -->
+		<iframe class="J_iframe" name="iframe0" id="iframe0" width="100%" height="100%" src="main.html" frameborder="0" data-id="main.html" seamless></iframe>
+		
+		<!-- iframe -->
+
+		<!-- END PAGE -->
+
+	</div>
+
+	<!-- END CONTAINER -->
+
+	<!-- BEGIN FOOTER -->
+
+	<div class="footer">
+
+		<div class="footer-inner">
+			校园闲置物品租赁平台
+		</div>
+
+		<div class="footer-tools">
+
+			<span class="go-top">
+
+			<i class="icon-angle-up"></i>
+
+			</span>
+
+		</div>
+
+	</div>
+
+	<!-- END FOOTER -->
+
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+
+	<!-- BEGIN CORE PLUGINS -->
+
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--[if lt IE 9]>
+
+	<script src="media/js/excanvas.min.js"></script>
+
+	<script src="media/js/respond.min.js"></script>  
+
+	<![endif]-->   
+
+
+
+	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+
+	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+
+	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+	<script type="text/javascript" src="media/js/select2.min.js"></script>
+
+	<script type="text/javascript" src="media/js/jquery.dataTables.js"></script>
+
+	<script type="text/javascript" src="media/js/DT_bootstrap.js"></script>
+
+	<!-- END PAGE LEVEL PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+	<script src="media/js/app.js"></script>
+
+	<script src="media/js/table-managed.js"></script>     
+
+	<script>
+
+
+	</script>
+	
+	
+
+	<!--[if lt IE 9]>
+
+	<script src="media/js/excanvas.min.js"></script>
+
+	<script src="media/js/respond.min.js"></script>  
+
+	<![endif]-->   
+
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+
+	<!-- END PAGE LEVEL PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	<!-- END PAGE LEVEL SCRIPTS -->  
+	
+	
+
+
+</body>
+
+
+
+
+
+
+
+<!-- END BODY -->
+<script>
+
+$(document).ready(function () {
+    $('#topiframe').load('top.html');
+    $('#footiframe').load('foot.html');
+    
+    $("#iframe0").load(function () {
+        var mainheight = $(this).contents().find("body").height() + 30;
+        $(this).height(mainheight);
+    });
+});
+    
+    
+
+
+
+
+
+
+
+</script>
+
+<script type="text/javascript">
+  var qs = Qs
+  var vm = new Vue({
+	  el:"#appleft",
+	  data:{
+	  },
+	  mounted(){
+
+		  jQuery(document).ready(function() {       
+
+		   App.init();
+
+		   TableManaged.init();
+
+		});
+
+
+
+	  },
+	  methods:{
+		  skip(url,e){
+              $(e.currentTarget.parentNode.parentNode.parentNode).addClass("active")
+              $("li").not(e.currentTarget.parentNode.parentNode.parentNode).removeClass("active")
+			  $("#iframe0").attr("src",url);
+          },
+	  }
+  })
+</script>
+
+
+</html>

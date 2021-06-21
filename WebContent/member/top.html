@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head>
+
+<script type="text/javascript" src="../axios/vue.js"></script>
+<script type="text/javascript" src="../axios/axios.min.js"></script>
+<script type="text/javascript" src="../axios/qs.js"></script>
+<script type="text/javascript" src="../axios/getUrlParams.js"></script>
+<script type="text/javascript" src="../layer/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="../layer/layer.js"></script>
+</head>
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed">
+
+	<!-- BEGIN HEADER -->
+
+
+		<!-- BEGIN TOP NAVIGATION BAR -->
+
+		<div class="navbar-inner" id="apptop">
+
+			<div class="container-fluid">
+
+				<!-- BEGIN LOGO -->
+
+				<a class="brand" href="index.html" style="color:white;">
+					校园闲置物品租赁平台
+				</a>
+
+				<!-- END LOGO -->
+
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+				<img src="media/image/menu-toggler.png" alt="" />
+
+				</a>          
+
+				<!-- END RESPONSIVE MENU TOGGLER -->            
+
+				<!-- BEGIN TOP NAVIGATION MENU -->              
+
+				<ul class="nav pull-right">
+
+					<!-- BEGIN NOTIFICATION DROPDOWN -->   
+
+
+					<!-- END NOTIFICATION DROPDOWN -->
+
+					<!-- BEGIN INBOX DROPDOWN -->
+
+
+					<!-- END INBOX DROPDOWN -->
+
+					<!-- BEGIN TODO DROPDOWN -->
+
+
+					<!-- END TODO DROPDOWN -->
+
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+
+					<li class="dropdown user">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+						<img alt="" :src="['../upload/'+sessionmember.filename]" style="width: 30px;"/>
+
+						<span class="username">{{sessionmember.tname}}</span>
+
+						<i class="icon-angle-down"></i>
+
+						</a>
+
+						<ul class="dropdown-menu">
+                            <li><a href="javascript:;" @click="goindex()"><i class="icon-home"></i> 去前台</a></li>
+
+							<li><a href="memberedit.html"><i class="icon-user"></i> 个人信息</a></li>
+
+							<li><a href="updateupass.html"><i class="icon-asterisk"></i> 密码</a></li>
+							<li class="divider"></li>
+
+
+							<li><a href="javascript:;" @click="logout()"><i class="icon-key"></i> 退出</a></li>
+
+						</ul>
+
+					</li>
+
+					<!-- END USER LOGIN DROPDOWN -->
+
+				</ul>
+
+				<!-- END TOP NAVIGATION MENU --> 
+
+			</div>
+
+		</div>
+
+</body>
+
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$(".dropdown-menu>li>a").click(function (e) {
+		e.preventDefault();
+		$("#iframe0").attr("src",$(this).attr("href"));
+
+		$(this).next().addClass("active");
+		});
+		});
+	
+	
+  var qs = Qs
+  var vm = new Vue({
+	  el:"#apptop",
+	  data:{
+		  sessionmember:"",
+	  },
+	  mounted(){
+		  this.getsessionmember()
+	  },
+	  methods:{
+          getsessionmember(){
+              axios.post('../checkmember.do',qs.stringify({
+              })).then(response =>{
+                  if(response.data.data==200){
+                      this.sessionmember = response.data.sessionmember
+                  }else{
+                      location.replace("../index.html")
+                  }
+              }).catch(error =>{
+                  console.log(error)
+              })
+          },
+
+		  logout(){
+			  axios.post('../memberExit.do',qs.stringify({
+			  })).then(response =>{
+				  location.replace("../index.html")
+			  }).catch(error =>{
+				  console.log(error)
+			  })
+		  },
+          goindex(){
+              location.replace("../index.html")
+          }
+		  
+		  
+	  }
+  })
+</script>
+</html>

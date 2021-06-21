@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="layui/css/layui.css" rel="stylesheet">
+<body>
+<div style="padding: 20px;" id="walletapp">
+    <form class="layui-form" action="">
+
+
+        <div class="layui-form-item">
+            <label>当前余额:<span v-html="money">0.01</span></label>
+        </div>
+
+<!-- 钱包充值 -->
+        <div class="layui-form-item">
+            <input type="text" v-model="wallet" id="wallet" required  lay-verify="required" placeholder="请输入充值金额" autocomplete="off" class="layui-input">
+        </div>
+
+
+
+        <div class="layui-form-item">
+            <a class="layui-btn" lay-submit lay-filter="formDemo" @click="add()">充值</a>
+        </div>
+        
+        
+        <!-- 钱包提现 -->
+        <div class="layui-form-item">
+            <input type="text" v-model="cashOutWallet" id="cashOutWallet" required  lay-verify="required" placeholder="请输入提现金额" autocomplete="off" class="layui-input">
+        </div>
+        
+        
+        <div class="layui-form-item">
+           
+           <a class="layui-btn" lay-submit lay-filter="formDemo" @click="cashOut()">提现</a>
+        </div>
+
+
+    </form>
+
+</div>
+<script type="text/javascript" src="layer/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="layer/layer.js"></script>
+<script type="text/javascript" src="axios/vue.js"></script>
+<script type="text/javascript" src="axios/axios.min.js"></script>
+<script type="text/javascript" src="axios/qs.js"></script>
+<script type="text/javascript" src="axios/getUrlParams.js"></script>
+
+<script type="text/javascript">
+    var qs = Qs
+    var walletapp = new Vue({
+        el:"#walletapp",
+        data:{
+            wallet:"",
+            money:"",
+            cashOutWallet:"",
+        },
+        mounted(){
+            this.getwallet()
+        },
+        methods:{
+        	//点击充值
+            add(){
+                if(!/^[1-9]\d*$/.test(this.wallet)){
+                    layer.msg("充值金额输入错误",{icon:5})
+                    this.wallet = ""
+                    return false;
+                }
+                axios.post('chongzhi.do',qs.stringify({
+                    wallet:this.wallet,
+                })).then(response =>{
+                    if(response.data.data==200){
+                    	this.wallet = ""
+                        this.getwallet()
+                        layer.msg("充值成功！",{icon:1})
+                    }else{
+                        parent.layer.closeAll();
+                    }
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+            //点击提现
+            cashOut(){
+            	if(!/^[1-9]\d*$/.test(this.cashOutWallet)){
+                    layer.msg("提现金额输入错误！",{icon:5})
+                    this.cashOutWallet = ""
+                    return false;
+                }
+            	if(this.cashOutWallet > this.money){
+            		 layer.msg("你没有这么多钱可以提现哦！",{icon:5})
+            		 this.cashOutWallet = ""
+            		 return false;
+            	}
+            	axios.post('cashOut.do',qs.stringify({
+            		cashOutWallet:this.cashOutWallet,
+            	})).then(response =>{
+            		if(response.data.data ==200){
+            			this.cashOutWallet = ""
+            			layer.msg("提现成功！",{icon:1})
+            			this.getwallet()
+            		}else{
+            			parnet.layer.closeAll();
+            		}
+            	}).catch(error =>{
+            		console.log(error)
+            	})
+            },
+            getwallet(){
+                axios.post('checkmember.do',qs.stringify({
+                })).then(response =>{
+                    if(response.data.data==200){
+                        this.sessionmember = response.data.sessionmember
+                        this.money = this.sessionmember.wallet
+                    }else{
+                        parent.layer.closeAll()
+                    }
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+        }
+    })
+</script>
+</body>
+
+
+</html>

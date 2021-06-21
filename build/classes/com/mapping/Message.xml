@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.MessageDAO">
+    <resultMap id="BaseResultMap" type="com.bean.Message">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="memberid" jdbcType="INTEGER" property="memberid"/>
+        <result column="sellerid" jdbcType="INTEGER" property="sellerid"/>
+        <result column="productid" jdbcType="INTEGER" property="productid"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="savetime" jdbcType="VARCHAR" property="savetime"/>
+        <result column="hfcontent" jdbcType="VARCHAR" property="hfcontent"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+    </resultMap>
+
+    <insert id="add" parameterType="Message">
+      insert into Message values(null,#{memberid},#{sellerid},#{productid},#{content},#{savetime},#{hfcontent},#{score})
+    </insert>
+
+
+    <select id="selectAll" parameterType="hashmap" resultMap="BaseResultMap">
+        select * from Message where 1=1
+        <if test="memberid!=null and memberid!=''">
+            and memberid=#{memberid}
+        </if>
+        <if test="sellerid!=null and sellerid!=''">
+            and sellerid=#{sellerid}
+        </if>
+        <if test="productid!=null and productid!=''">
+            and productid=#{productid}
+        </if>
+        <if test="key!=null and key!=''">
+            and memberid in (select id from member where tname like "%"#{key}"%")
+        </if>
+        order by id desc
+    </select>
+
+    <select id="findById" parameterType="int" resultType="Message">
+      select * from Message  where id=#{id}
+    </select>
+
+    <update id="update" parameterType="com.bean.Message">
+        update message
+        <set>
+            <if test="hfcontent!=null and hfcontent!=''">hfcontent=#{hfcontent}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+      delete from Message where id=#{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+<div style="padding: 20px;" id="app">
+    <form class="layui-form">
+
+        <div class="layui-form-item">
+            <textarea v-model="hfcontent" placeholder="请输入回复内容" class="layui-textarea"></textarea>
+        </div>
+
+        <div class="layui-form-item">
+                <a class="layui-btn" lay-submit lay-filter="formDemo" @click="add()">提交</a>
+        </div>
+
+    </form>
+</div>
+</body>
+<script type="text/javascript" src="../axios/vue.js"></script>
+<script type="text/javascript" src="../axios/axios.min.js"></script>
+<script type="text/javascript" src="../axios/qs.js"></script>
+<script type="text/javascript" src="../axios/getUrlParams.js"></script>
+<script type="text/javascript" src="../layer/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="../layer/layer.js"></script>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    var qs = Qs
+    var id = UrlParam.paramValues("id").toString()
+    var vmm = new Vue({
+        el: '#app',
+        data: {
+            id:id,
+            hfcontent:"",
+        },
+        methods: {
+            add() {
+                if(this.hfcontent==""){
+                    layer.msg("回复内容不能为空",{icon:5})
+                    return false;
+                }
+                axios.post('messageEdit.do',qs.stringify({
+                    id:this.id,
+                    hfcontent:this.hfcontent,
+                })).then(response =>{
+                        layer.alert("回复成功",{icon:6},function(){
+                            window.parent.layer.closeAll();
+                            window.parent.location.reload();
+                        })
+
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+
+
+
+
+
+        }
+    });
+</script>
+</html>

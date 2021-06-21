@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<!-- Head BEGIN -->
+<head>
+  <meta charset="utf-8">
+  <title>校园闲置物品租赁平台</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta content="Metronic Shop UI description" name="description">
+  <meta content="Metronic Shop UI keywords" name="keywords">
+  <meta content="keenthemes" name="author">
+
+  <meta property="og:site_name" content="-CUSTOMER VALUE-">
+  <meta property="og:title" content="-CUSTOMER VALUE-">
+  <meta property="og:description" content="-CUSTOMER VALUE-">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
+  <meta property="og:url" content="-CUSTOMER VALUE-">
+
+  <link rel="shortcut icon" href="favicon.ico">
+
+    <link href="layui/css/layui.css" rel="stylesheet">
+  <!-- Fonts START -->
+  <!-- Fonts END -->
+
+  <!-- Global styles START -->          
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link href="assets/pages/css/animate.css" rel="stylesheet">
+  <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+  <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link href="assets/pages/css/components.css" rel="stylesheet">
+  <link href="assets/pages/css/slider.css" rel="stylesheet">
+  <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+  <link href="assets/corporate/css/style.css" rel="stylesheet">
+  <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
+  <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+  <link href="assets/corporate/css/custom.css" rel="stylesheet">
+  <!-- Theme styles END -->
+
+
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+    <!-- BEGIN STYLE CUSTOMIZER -->
+    <!-- END BEGIN STYLE CUSTOMIZER -->
+
+    <!-- BEGIN TOP BAR -->
+    <div class="pre-header" id="loginiframe">
+    </div>
+    <!-- END TOP BAR -->
+
+    <!-- BEGIN HEADER -->
+    <div class="header">
+      <div class="container" id="headeriframe">
+        <!-- BEGIN CART -->
+        <!--END CART -->
+        <!-- BEGIN NAVIGATION -->
+        <!-- END NAVIGATION -->
+      </div>
+    </div>
+    <!-- Header END -->
+    <div class="tlinks">Collect from <a href="https://www.webmoban.net" >网站建设</a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--VUE-->
+    <div id="app">
+    <!-- BEGIN SLIDER -->
+    <div class="page-slider margin-bottom-35">
+        <!--滚动图片-->
+
+        <div class="layui-carousel" id="test10">
+            <div carousel-item="">
+                    <div v-for="imgadv in imgadvlist"><img :src="['upload/'+imgadv.filename]" style="width: 100%;display: block;height: 100%" @click="toproductdetails(imgadv.url)"></div>
+            </div>
+        </div>
+        <!--滚动图片-->
+
+    </div>
+    <!-- END SLIDER -->
+
+    <div class="main">
+      <div class="container">
+        <!-- BEGIN SALE PRODUCT & NEW ARRIVALS -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN SALE PRODUCT -->
+          <div class="col-md-12 sale-product">
+            <h2>最近更新</h2>
+            <div class="owl-carousel owl-carousel5" style="display: flex;flex-wrap: wrap;justify-content : center;">
+
+            
+              <div v-for="newsproduct in newsproductlist" style="width: 23%;margin: 20px 20px 20px 0px;">
+                <div class="product-item" >
+                  <div class="pi-img-wrapper">
+                    <img :src="['upload/'+newsproduct.filename]" class="img-responsive" alt="Berry Lace Dress">
+                    <div>
+                      <a :href="['upload/'+newsproduct.filename]" class="btn btn-default fancybox-button">放大</a>
+                    </div>
+                  </div>
+                  <h3><a :href="['productdetails.html?id='+newsproduct.id]">{{newsproduct.name}}</a></h3>
+                  <div class="pi-price">￥{{newsproduct.price}}</div>
+                  <a  :href="['productdetails.html?id='+newsproduct.id]" class="btn btn-default add2cart">查看详情</a>
+                  <a  @click="addfav(newsproduct.id)" class="btn btn-default add2cart">收藏物品</a>
+                  <div class="sticker sticker-hot"></div>
+                </div>
+
+
+              </div>
+
+
+
+                <!--推荐物品-->
+
+
+            </div>
+          </div>
+          <!-- END SALE PRODUCT -->
+        </div>
+        <!-- END SALE PRODUCT & NEW ARRIVALS -->
+
+        <!-- BEGIN SIDEBAR & CONTENT -->
+
+        <!-- END SIDEBAR & CONTENT -->
+
+        <!-- BEGIN TWO PRODUCTS & PROMO -->
+
+        <!-- END TWO PRODUCTS & PROMO -->
+      </div>
+    </div>
+    </div>
+    <!--VUE-->
+
+    <!-- BEGIN BRANDS -->
+    <!-- END BRANDS -->
+
+    <!-- BEGIN STEPS -->
+    <!-- END STEPS -->
+
+    <!-- BEGIN PRE-FOOTER -->
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <div class="footer" id="footiframe">
+    </div>
+    <!-- END FOOTER -->
+
+    <!-- BEGIN fast view of a product -->
+
+    <!-- END fast view of a product -->
+
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>
+    <![endif]-->
+    <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+    <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+    <script src='assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+    <script src="assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+
+    <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
+    <script src="assets/pages/scripts/bs-carousel.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+<script type="text/javascript" src="axios/vue.js"></script>
+<script type="text/javascript" src="axios/axios.min.js"></script>
+<script type="text/javascript" src="axios/qs.js"></script>
+<script type="text/javascript" src="axios/getUrlParams.js"></script>
+<script type="text/javascript" src="layer/layer.js"></script>
+
+
+<script src="layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+</script>
+<script type="text/javascript">
+    var qs = Qs
+    var vmm = new Vue({
+        el: '#app',
+        data: {
+            imgadvlist:[],
+            newsproductlist:[], //最新物品
+        },
+        mounted(){
+            sessionStorage.setItem("signoutShow","index")
+            this.getimgadvlist()
+            this.getnewsproductlist()
+
+            jQuery(document).ready(function() {
+                Layout.init();
+                Layout.initOWL();
+                Layout.initImageZoom();
+                Layout.initTouchspin();
+                //Layout.initTwitter();
+            });
+
+        },
+        methods: {
+			
+            //最新物品
+            getnewsproductlist(){
+                axios.post('productList.do',qs.stringify({
+                    issj:"yes",
+                    shstatus:"通过审核",
+                })).then(response =>{
+                    this.newsproductlist = response.data.list
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+            
+            
+            getimgadvlist(){
+                axios.post('admin/imgadvList.do',qs.stringify({
+                })).then(response =>{
+                    this.imgadvlist = response.data.list
+
+                    layui.use(['carousel', 'form'], function(){
+                        var carousel = layui.carousel
+                            ,form = layui.form;
+                        //图片轮播
+                        carousel.render({
+                            elem: '#test10'
+                            ,width: '100%'
+                            ,height: '540px'
+                            ,interval: 5000
+                        });
+                    });
+                }).catch(error =>{
+                    console.log(error)
+                })
+            },
+
+            toproductmsg(childid){
+                location.replace("productmsg.html?childid="+childid)
+            },
+            toproductdetails(url){
+                location.replace(url)
+            },
+            addfav(newsproductid){
+                axios.post('checkmember.do',qs.stringify({
+                })).then(response =>{
+                    if(response.data.data==400){
+                        location.replace("login.html")
+                    }else{
+                        axios.post('favAdd.do',qs.stringify({
+                            productid:newsproductid,
+                        })).then(response =>{
+                            if(response.data.data==200){
+                                layer.msg("收藏成功",{icon:6})
+                            }else{
+                                layer.msg("已存在收藏记录",{icon:5})
+                                headapp.getcheckmember();
+                            }
+                        }).catch(error =>{
+                            console.log(error)
+                        })
+                    }
+                }).catch(error =>{
+                    console.log(error)
+                })
+
+
+            },
+
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    window.onload=function(){
+        $("#loginiframe").load("iframe/loginiframe.html")
+        $("#headeriframe").load("iframe/headeriframe.html")
+        $("#footiframe").load("iframe/footiframe.html")
+
+    }
+</script>
+
+</html>

@@ -1,6 +1,7 @@
 # Campus-Idle-Rental-Website
 ##校园闲置租赁网站
-### mysqls数据库版本：5.7.24
+## mysqls数据库版本：5.7.24
+## Tomcat版本：8.0
 ### 数据库文件（直接导入到自己的数据库软件中）
 /*
 Navicat MySQL Data Transfer
@@ -290,5 +291,5 @@ CREATE TABLE `sysuser` (
 -- Records of sysuser
 -- ----------------------------
 INSERT INTO `sysuser` VALUES ('16', 'admin', '123', '管理员', 'admin', '2c7c5999-65f8-4ab5-a7c2-3d158ecd09a8.jpg', '男', '15610800750', '422429198502013322', '0', '在岗');
-### 修改Mysql数据库的密码
+### 修改Mysql数据库的密码（src文件夹下的db.properties）
 ![image](https://user-images.githubusercontent.com/53282131/122696908-ccdde480-d276-11eb-81cd-75fbb184ccd7.png)

@@ -293,3 +293,6 @@ CREATE TABLE `sysuser` (
 INSERT INTO `sysuser` VALUES ('16', 'admin', '123', '管理员', 'admin', '2c7c5999-65f8-4ab5-a7c2-3d158ecd09a8.jpg', '男', '15610800750', '422429198502013322', '0', '在岗');
 ### 修改Mysql数据库的密码（src文件夹下的db.properties）
 ![image](https://user-images.githubusercontent.com/53282131/122696908-ccdde480-d276-11eb-81cd-75fbb184ccd7.png)
+修改完成之后，导入eclipse/idea运行即可
+eclise的前台运行地址：localhost:8080/secondhandvue/index.html
+eclipse的管理员运行地址：localhost:8080/secondhandvue/admin/login.html
